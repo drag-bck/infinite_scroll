@@ -1,6 +1,6 @@
 import React from "react";
 import "./Header.scss";
-import { useStore } from "../../store/store";
+// import { useStore } from "../../store/store";
 
 const Header = () => {
   // const { filterState, dispatch } = useStore();

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useStore } from "../../store/store";
+// import { useStore } from "../../store/store";
 import Observer from "../intersection-observer";
 import Axios from "axios";
 import Loader from "../loader";
