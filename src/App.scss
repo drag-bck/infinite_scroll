@@ -1,0 +1,29 @@
+.App {
+  .img-container {
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 300px;
+    height: 300px;
+    align-items: center;
+  }
+  .img-wrapper {
+    width: 300px;
+    height: 300px;
+    border: 1px solid #777777;
+    padding: 5px;
+    align-content: center;
+    display: flex;
+    margin: 40px 10px;
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .spinner {
+    display: flex;
+    justify-content: center;
+  }
+}
