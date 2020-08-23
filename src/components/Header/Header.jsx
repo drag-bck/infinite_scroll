@@ -1,24 +1,24 @@
 import React from "react";
 import "./Header.scss";
-// import { useStore } from "../../store/store";
+import { useStore } from "../../store/store";
 
 const Header = () => {
-  // const { filterState, dispatch } = useStore();
+  const { filterState, dispatch } = useStore();
 
-  // const setActiveTab = (value) => {
-  //   dispatch({
-  //     type: "UPDATE",
-  //     payload: {
-  //       activeTab: value,
-  //     },
-  //   });
-  // };
+  const setActiveTab = (value) => {
+    dispatch({
+      type: "UPDATE",
+      payload: {
+        activeTab: value,
+      },
+    });
+  };
   return (
     <div className="header">
       <div>
         <div className="header-image"></div>
         <div className="title">Animals Ahoy!</div>
-        {/* <div className="subtitle">
+        <div className="subtitle">
           <span
             className={filterState.activeTab === "all" ? "heighlight" : ""}
             onClick={() => setActiveTab("all")}
@@ -43,7 +43,7 @@ const Header = () => {
           >
             FOX
           </span>
-        </div> */}
+        </div>
       </div>
     </div>
   );

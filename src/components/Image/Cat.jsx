@@ -1,68 +1,40 @@
-import React, { useEffect, useState } from "react";
-// import { useStore } from "../../store/store";
+import React, { useEffect, useState, useRef } from "react";
 import Observer from "../intersection-observer";
 import Axios from "axios";
 import Loader from "../loader";
-import { throttle, debounce } from "throttle-debounce";
 
-const Image = (props) => {
-  // const { filterState, dispatch } = useStore();
+const Cat = (props) => {
   const [showLoader, setShowLoader] = useState(true);
   const [imageList, setImageList] = useState([]);
 
+  const apiLock = useRef(false);
+
   useEffect(() => {
     window.scroll(0, 0);
-    debounce(1000);
     setImageList([]);
   }, []);
 
-  // const urlBinder = {
-  //   cat: "file",
-  //   dog: "url",
-  //   fox: "image",
-  // };
-
-  // const urlObj = {
-  //   cat: "https://aws.random.cat/meow",
-  //   dog: "https://random.dog/woof.json",
-  //   fox: "https://randomfox.ca/floof/",
-  // };
-
-  const getRandomUrl = () => {
-    const url = [
-      "https://aws.random.cat/meow",
-      "https://random.dog/woof.json",
-      "https://randomfox.ca/floof/",
-    ];
-
-    return url[Math.floor(Math.random() * 3)];
-  };
-
-  const onLoadMoreIntersection = throttle(25, () => {
+  const onLoadMoreIntersection = () => {
     setShowLoader(true);
-    let url = getRandomUrl();
+    let url = "https://aws.random.cat/meow";
+    if (apiLock.current) {
+      return;
+    }
+    apiLock.current = true;
     Axios.get(url)
       .then((response) => {
-        let img;
-        if (response.data.file) {
-          img = response.data.file;
-        }
-        if (response.data.url) {
-          img = response.data.url;
-        }
-        if (response.data.image) {
-          img = response.data.image;
-        }
-
+        let img = response.data.file;
         if (img && imageList.indexOf(img) === -1) {
           const imgArray = [...imageList, img];
           setImageList(imgArray);
         }
+        apiLock.current = false;
       })
       .catch((error) => {
         console.log(error);
+        apiLock.current = false;
       });
-  });
+  };
 
   const renderImages = () => {
     const template = imageList.map((item, index) => {
@@ -91,4 +63,4 @@ const Image = (props) => {
   );
 };
 
-export default Image;
+export default Cat;
